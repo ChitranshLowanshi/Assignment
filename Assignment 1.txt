@@ -1,0 +1,67 @@
+length
+An array is an object that holds a fixed number of values of the same type.
+The length variable in an array returns the length of an array i.e. a number of elements stored in an array.
+Once arrays are initialized, its length cannot be changed, so the length variable can directly be used to get the length of an array.
+The length variable is used only for an array.
+
+length()
+The length() method is a static method of String class.
+The length() returns the length of a string object i.e. the number of characters stored in an object.
+String class uses this method because the length of a string can be modified using the various operations on an object.
+The String class internally uses a char[] array that it does not expose to the outside world.
+
+Multiple Inheritance
+Multiple Inheritance is a feature of an object-oriented concept, where a class can inherit properties of more than one parent class. The problem occurs when there exist methods with the same signature in both the superclasses and subclass. On calling the method, the compiler cannot determine which class method to be called and even on calling which class method gets the priority.
+Example:-
+class Parent1 {
+ 
+  // Method inside first parent class
+  void fun() {
+ 
+    // Print statement if this method is called
+    System.out.println("Parent1");
+  }
+}
+ 
+// Class 2
+// Second Parent Class
+class Parent2 {
+ 
+  // Method inside first parent class
+  void fun() {
+ 
+    // Print statement if this method is called
+    System.out.println("Parent2");
+  }
+}
+ 
+// Class 3
+// Trying to be child of both the classes
+class Test extends Parent1, Parent2 {
+ 
+  // Main driver method
+  public static void main(String args[]) {
+ 
+    // Creating object of class in main() method
+    Test t = new Test();
+ 
+    // Trying to call above functions of class where
+    // Error is thrown as this class is inheriting
+    // multiple classes
+    t.fun();
+  }
+} 
+
+Hybrid Inheritance
+A hybrid inheritance is a combination of more than one types of inheritance. For example when class A and B extends class C & another class D extends class A then this is a hybrid inheritance, because it is a combination of single and hierarchical inheritance. Let me show you this diagrammatically:
+
+         C
+         ↑
+         |
+  ---------------
+  ↑             ↑
+  |             |
+  A             B
+  ↑
+  |
+  D
