@@ -1,0 +1,16 @@
+It is different from other maps because, it compare keys using reference(i.e == operator is used for comparison between keys)
+It uses System.identityHashCode(obj) for generating a hashcode, and for finding a bucket location.
+It allows to insert duplicate keys with different references, with this it breaks map contract.
+IdentityHashMap performs better than HashMap, because it compares keys using references(==), where as HashMap uses objects for comparing
+
+
+WeakHashMap implements Map with initial capacity 16.
+
+First we should know the clear cut difference between weak and strong reference.
+WeakReference: When an object is assigned with some value, and it’s not reachable then that value will be removed/garbage collected.
+ex: WeakHashMap.
+
+StrongReference: By default any object in java are StrongReference, i.e. they garbage collected only if there are no reference to it.
+User user = new User();
+
+WeakHashMap works on weak references, i.e. when a key of WeakHashMap is not in use( or assigned to null) and garbage collected, then that entry will be removed from it.

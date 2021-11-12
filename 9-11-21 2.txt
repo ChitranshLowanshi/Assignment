@@ -1,0 +1,5 @@
+theoretically in java collection is sub-categorized further to list, queue, set and map as these all are used to collect info and organized in the required form (required to solve real time issue- like you can’t create application on ticket counter line with map but can with queue).
+
+So, when Collection is created they gave Collection a powerful ability, ability to acquire data from collections automatically without giving headache to user(us), called Iterability(ability to iterate through out the collection). How? By extending Iterable interface to Collection (bonus- Iterable contain only one method: iterator() which provide object of a class which is created by JVM at runtime which implement Iterator interface).
+
+Now they noticed that this iterating ability can only be applied to 1-Dimesional collection like list, queue, set but not to map (bonus- why 1-D only? Because Iterator internally uses index to retrieve next element as well to check whether more element is present or not). As Map doesn’t support index but key-value structure and hence is a 2-D, so can’t be iterate and hence can’t extends Collection which further extends Iterable.

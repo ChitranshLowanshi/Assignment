@@ -1,0 +1,31 @@
+The Map interface present in java.util package represents a mapping between a key and a value. The Map interface is not a subtype of the Collection interface. Therefore it behaves a bit differently from the rest of the collection types. A map contains unique keys.
+
+Map Interface in Java
+
+Attention reader! Don’t stop learning now. Get hold of all the important Java Foundation and Collections concepts with the Fundamentals of Java and Java Collections Course at a student-friendly price and become industry ready. To complete your preparation from learning a language to DS Algo and many more,  please refer Complete Interview Preparation Course.
+
+Example:
+
+
+// Java program to demonstrate
+// the working of Map interface
+  
+import java.util.*;
+class HashMapDemo {
+    public static void main(String args[])
+    {
+        Map<String, Integer> hm
+            = new HashMap<String, Integer>();
+  
+        hm.put("a", new Integer(100));
+        hm.put("b", new Integer(200));
+        hm.put("c", new Integer(300));
+        hm.put("d", new Integer(400));
+  
+        // Traversing through the map
+        for (Map.Entry<String, Integer> me : hm.entrySet()) {
+            System.out.print(me.getKey() + ":");
+            System.out.println(me.getValue());
+        }
+    }
+}
