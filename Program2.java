@@ -1,8 +1,12 @@
-package operators;
+package com.technoelevate.advancedjava.multithreading;
 
-public class Program2 {
- public static void main(String[] args) {
-	System.out.println("1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21");
-	System.out.println();
+public class Program2 extends Thread{
+
+  @Override
+	public void run() {
+for (int i = 0; i < 12; i++) {
+	System.out.println("program2 thred running");
 }
+	}
+
 }
