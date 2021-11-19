@@ -1,0 +1,80 @@
+Relational Databases
+A relational database is one that stores data in tables. The relationship between each data point is clear and searching through those relationships is relatively easy. The relationship between tables and field types is called a schema.
+eg: Popular Relational/SQL Databases
+SQL Server
+PostgreSQL
+MySQL
+
+Non-Relational Databases
+Back to your “data dog.” This time, it went over to the Word doc. Why? All the open space! The data comes in all different shapes and sizes – it needs room to spread out.
+
+A non-relational database is any database that does not use the tabular schema of rows and columns like in relational databases. Rather, its storage model is optimized for the type of data it’s storing.
+Eg: Popular Non-Relational/NoSQL Databases
+MongoDB
+Redis
+
+Types of SQL Data
+Types of SQL Data
+1. Binary
+Binary data type holds a sequence of binary byte strings. Unlike the usual character strings, the binary strings are used to store unconventional data such as images.
+
+Binary(size): Stores binary byte strings of column length specified by the size parameter. The size of the column is fixed. If the size is defined as 10 bytes and data stored is 5 bytes, the remaining 5 bytes are still occupied in the memory by the column. These remaining bytes are null padded to the right by most SQL parsers. The maximum size possible is 8000 bytes.
+
+Varbinary(size): Stores binary byte strings of column length specified by the size parameter. The size of the column is not fixed. If the size is defined as 10 bytes and data stored is 5 bytes, the column occupies only 5 bytes in the memory. The maximum size possible is 8000 bytes.
+
+Varbinary(max): Specifying the keyword max in the size parameter increases the maximum possible size to 2GB and allocates variable size to columns based on the data stored. MySQL does not support this data type.
+
+2. Character/String
+These data types store either a single character or a series of characters forming a string. These include characters, numbers, and special characters. The nature of the character(s) is, however, limited to non-Unicode characters only.
+
+Char(size): Stores fixed-length character strings of the length specified by the size parameter. The sizing of the column works in a similar fashion to the BINARY data type. The default size is 1 character. The maximum is 255 in most database management systems.
+
+Varchar(size): Stores variable-length character strings. However, the length specified by the size parameter defines the maximum length of the column. The maximum possible length is 65535 characters.
+
+Varchar(max): Specifying the keyword max in the size parameter increases the maximum possible size to 2GB and allocates variable size to columns based on the data stored. MySQL does not support this data type.
+
+3. Unicode Character/String
+These data types store either a single or a string of Unicode characters.
+
+Nchar(size): This is similar to char data type and supports Unicode characters as well. The maximum limit is, however, reduced to 4000 bytes.
+
+Nvarchar(size): This is similar to the nvarchar data type and supports Unicode characters as well. The maximum limit is, however, reduced to 4000 bytes.
+
+Nvarchar(max): Specifying the keyword max in the size parameter increases the maximum possible size to 1GB and allocates variable size to columns based on the data stored. MySQL does not support this data type.
+
+Ntext: MySQL supports the ntext data type instead of nvarchar(max). Ntext also increases the maximum possible size to 1GB.
+4. Numeric
+Numeric
+Numeric data types support integers and real/fractional/decimal numbers.
+
+Bit/Bool/Boolean: These datatypes store only two values – 0 and 1. 0 denotes false while 1 denotes true. Most databases support a bit. Some advanced databases do support bool and boolean as well.
+
+INT: Stores positive and negative integers up to 4 Bytes in size. This means the value must be in the range [-2147483648, 2147483647]. Specifying the keyword unsigned restricts the column to store only positive values in the range [0, 4294967295].
+
+TINYINT: Stores positive and negative integers up to 1 Byte in size. This means the value must be in the range [-128, 127]. Specifying the keyword unsigned restricts the column to store only positive values in the range [0, 255].
+
+Smallint: Stores positive and negative integers up to 2 Bytes in size. This means the value must be in the range [-32768, 32767]. Specifying the keyword unsigned restricts the column to store only positive values in the range [0, 65535].
+
+Bigint: Stores positive and negative integers up to 8 Bytes in size. This means the value must be in the range [-263, 263-1]. Specifying the keyword unsigned restricts the column to store only positive values in the range [0, 264-1].
+
+Decimal (size, D): Stores a fixed-point number. The parameter size specifies the total number of digits, whereas d specifies the number of digits following the decimal point. Default values for size and d are 10 and 0, respectively.
+
+Float (size, D) / Double (size, D): Stores a floating-point number. Float is used for smaller numbers up to 4 Bytes in size. Double stores larger numbers. However, double is not supported by all databases.
+
+5. Date & Time
+Date: Stores the data in the format YYYY-MM-DD, limited from 1000-01-01 to 9999-12-31.
+Time: Stores the time in the format hh:mm: ss.
+DateTime: Stores both the date and time.
+TimeStamp: The timestamp is used to mark a timestamp whenever a row is entered or updated in the table. This is usually done through keywords DEFAULT CURRENT_TIMESTAMP and ON UPDATE CURRENT_TIMESTAMP.
+
+Miscellaneous-SQL Data Types
+Miscellaneous-SQL Data Types
+CLOB: CLOB stands for Character Large Objects. They can hold character data for up to 2GB. Not supported by MySQL, though. MySQL uses Text to achieve the same.
+BLOB: BLOB stands for Binary Large Objects. They are used for storing binary objects of size up to 2GB. Usually, images are converted into binary objects and stored in BLOB columns.
+XML: Used for storing XML data.
+JSON: Used for storing JSON data. Not supported by MySQL.
+Conclusion
+The SQL data types help a lot in strategically optimizing the database space. In a digital world, where data is ever-growing at an exponential rate, a developer must wisely choose the type for every bit of data. This helps in the reduction of costs arising due to massive data storage.
+
+
+
