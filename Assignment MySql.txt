@@ -1,0 +1,323 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3
+Server version: 5.7.14-log MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> select * from electronic_items_shop;
+ERROR 1046 (3D000): No database selected
+mysql> use hardware;
+Database changed
+mysql> select * from electronic_items_shop;
++------------+-----------------+-------+-------------+----------+----------+
+| product_id | pname           | cost  | date_of_man | warranty | costumer |
++------------+-----------------+-------+-------------+----------+----------+
+|      10010 | Fan             |  1500 | 2021-10-15  | 1 year   | NULL     |
+|      10015 | Television      | 45000 | 2021-12-15  | 1 year   | NULL     |
+|      10215 | AC              | 20000 | 2021-02-15  | 2 year   | NULL     |
+|      12458 | Heater          |  4000 | 2021-01-05  | 6 months | NULL     |
+|      12855 | Music Player    |  3900 | 2021-11-25  | 6 months | NULL     |
+|      12893 | Cooler          |  6000 | 2021-01-05  | 1 year   | NULL     |
+|      14025 | Washing Machine | 14000 | 2021-07-25  | 1 year   | NULL     |
+|      14515 | Refrigerator    | 18000 | 2021-05-15  | 2 year   | NULL     |
++------------+-----------------+-------+-------------+----------+----------+
+8 rows in set (0.60 sec)
+
+mysql> rename table electronic_items_shop to electronics_items;
+Query OK, 0 rows affected (0.34 sec)
+
+mysql> select * from electronics_items;
++------------+-----------------+-------+-------------+----------+----------+
+| product_id | pname           | cost  | date_of_man | warranty | costumer |
++------------+-----------------+-------+-------------+----------+----------+
+|      10010 | Fan             |  1500 | 2021-10-15  | 1 year   | NULL     |
+|      10015 | Television      | 45000 | 2021-12-15  | 1 year   | NULL     |
+|      10215 | AC              | 20000 | 2021-02-15  | 2 year   | NULL     |
+|      12458 | Heater          |  4000 | 2021-01-05  | 6 months | NULL     |
+|      12855 | Music Player    |  3900 | 2021-11-25  | 6 months | NULL     |
+|      12893 | Cooler          |  6000 | 2021-01-05  | 1 year   | NULL     |
+|      14025 | Washing Machine | 14000 | 2021-07-25  | 1 year   | NULL     |
+|      14515 | Refrigerator    | 18000 | 2021-05-15  | 2 year   | NULL     |
++------------+-----------------+-------+-------------+----------+----------+
+8 rows in set (0.01 sec)
+
+mysql> alter table electronics_items
+    -> rename column costumer to customer;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column costumer to customer' at line 2
+mysql> alter table electronics_items
+    -> rename column 'costumer' to 'customer';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column 'costumer' to 'customer'' at line 2
+mysql> select * from electronics_items where pname like '_e%';
++------------+--------------+-------+-------------+----------+----------+
+| product_id | pname        | cost  | date_of_man | warranty | costumer |
++------------+--------------+-------+-------------+----------+----------+
+|      10015 | Television   | 45000 | 2021-12-15  | 1 year   | NULL     |
+|      12458 | Heater       |  4000 | 2021-01-05  | 6 months | NULL     |
+|      14515 | Refrigerator | 18000 | 2021-05-15  | 2 year   | NULL     |
++------------+--------------+-------+-------------+----------+----------+
+3 rows in set (0.09 sec)
+
+mysql> select * from electronics_items where pname like '%i__';
++------------+-----------------+-------+-------------+----------+----------+
+| product_id | pname           | cost  | date_of_man | warranty | costumer |
++------------+-----------------+-------+-------------+----------+----------+
+|      10015 | Television      | 45000 | 2021-12-15  | 1 year   | NULL     |
+|      14025 | Washing Machine | 14000 | 2021-07-25  | 1 year   | NULL     |
++------------+-----------------+-------+-------------+----------+----------+
+2 rows in set (0.00 sec)
+
+mysql> update electronics_items
+    -> set costumer='Chitransh'
+    -> where product_id=14515;
+Query OK, 1 row affected (0.23 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update electronics_items
+    -> set costumer='Azesha'
+    -> where pname='AC';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from electronics_items;
++------------+-----------------+-------+-------------+----------+-----------+
+| product_id | pname           | cost  | date_of_man | warranty | costumer  |
++------------+-----------------+-------+-------------+----------+-----------+
+|      10010 | Fan             |  1500 | 2021-10-15  | 1 year   | NULL      |
+|      10015 | Television      | 45000 | 2021-12-15  | 1 year   | NULL      |
+|      10215 | AC              | 20000 | 2021-02-15  | 2 year   | Azesha    |
+|      12458 | Heater          |  4000 | 2021-01-05  | 6 months | NULL      |
+|      12855 | Music Player    |  3900 | 2021-11-25  | 6 months | NULL      |
+|      12893 | Cooler          |  6000 | 2021-01-05  | 1 year   | NULL      |
+|      14025 | Washing Machine | 14000 | 2021-07-25  | 1 year   | NULL      |
+|      14515 | Refrigerator    | 18000 | 2021-05-15  | 2 year   | Chitransh |
++------------+-----------------+-------+-------------+----------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> update electronics_items
+    -> set costumer='Pranshu'
+    -> where pname='Television';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update electronics_items
+    -> set costumer='Manisha'
+    -> where cost=14000;
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from electronics_items;
++------------+-----------------+-------+-------------+----------+-----------+
+| product_id | pname           | cost  | date_of_man | warranty | costumer  |
++------------+-----------------+-------+-------------+----------+-----------+
+|      10010 | Fan             |  1500 | 2021-10-15  | 1 year   | NULL      |
+|      10015 | Television      | 45000 | 2021-12-15  | 1 year   | Pranshu   |
+|      10215 | AC              | 20000 | 2021-02-15  | 2 year   | Azesha    |
+|      12458 | Heater          |  4000 | 2021-01-05  | 6 months | NULL      |
+|      12855 | Music Player    |  3900 | 2021-11-25  | 6 months | NULL      |
+|      12893 | Cooler          |  6000 | 2021-01-05  | 1 year   | NULL      |
+|      14025 | Washing Machine | 14000 | 2021-07-25  | 1 year   | Manisha   |
+|      14515 | Refrigerator    | 18000 | 2021-05-15  | 2 year   | Chitransh |
++------------+-----------------+-------+-------------+----------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select pname as product_name
+    -> costumer as customer
+    -> from electronics_items;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'costumer as customer
+from electronics_items' at line 2
+mysql> select pname as product_name
+    -> from electronoics_items;
+ERROR 1146 (42S02): Table 'hardware.electronoics_items' doesn't exist
+mysql> select pname as product_name
+    -> from electronics_items;
++-----------------+
+| product_name    |
++-----------------+
+| Fan             |
+| Television      |
+| AC              |
+| Heater          |
+| Music Player    |
+| Cooler          |
+| Washing Machine |
+| Refrigerator    |
++-----------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from electronics_items;
++------------+-----------------+-------+-------------+----------+-----------+
+| product_id | pname           | cost  | date_of_man | warranty | costumer  |
++------------+-----------------+-------+-------------+----------+-----------+
+|      10010 | Fan             |  1500 | 2021-10-15  | 1 year   | NULL      |
+|      10015 | Television      | 45000 | 2021-12-15  | 1 year   | Pranshu   |
+|      10215 | AC              | 20000 | 2021-02-15  | 2 year   | Azesha    |
+|      12458 | Heater          |  4000 | 2021-01-05  | 6 months | NULL      |
+|      12855 | Music Player    |  3900 | 2021-11-25  | 6 months | NULL      |
+|      12893 | Cooler          |  6000 | 2021-01-05  | 1 year   | NULL      |
+|      14025 | Washing Machine | 14000 | 2021-07-25  | 1 year   | Manisha   |
+|      14515 | Refrigerator    | 18000 | 2021-05-15  | 2 year   | Chitransh |
++------------+-----------------+-------+-------------+----------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> alter electronics_items
+    -> drop column costumer;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'electronics_items
+drop column costumer' at line 1
+mysql> alter table electronics_items
+    -> drop column costumer;
+Query OK, 0 rows affected (1.18 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from electronics_items where cost between 10000 and 20000;
++------------+-----------------+-------+-------------+----------+
+| product_id | pname           | cost  | date_of_man | warranty |
++------------+-----------------+-------+-------------+----------+
+|      10215 | AC              | 20000 | 2021-02-15  | 2 year   |
+|      14025 | Washing Machine | 14000 | 2021-07-25  | 1 year   |
+|      14515 | Refrigerator    | 18000 | 2021-05-15  | 2 year   |
++------------+-----------------+-------+-------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from electronics_items where cost in (20000,14000);
++------------+-----------------+-------+-------------+----------+
+| product_id | pname           | cost  | date_of_man | warranty |
++------------+-----------------+-------+-------------+----------+
+|      10215 | AC              | 20000 | 2021-02-15  | 2 year   |
+|      14025 | Washing Machine | 14000 | 2021-07-25  | 1 year   |
++------------+-----------------+-------+-------------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from electronics_items
+    -> order by pname desc;
++------------+-----------------+-------+-------------+----------+
+| product_id | pname           | cost  | date_of_man | warranty |
++------------+-----------------+-------+-------------+----------+
+|      14025 | Washing Machine | 14000 | 2021-07-25  | 1 year   |
+|      10015 | Television      | 45000 | 2021-12-15  | 1 year   |
+|      14515 | Refrigerator    | 18000 | 2021-05-15  | 2 year   |
+|      12855 | Music Player    |  3900 | 2021-11-25  | 6 months |
+|      12458 | Heater          |  4000 | 2021-01-05  | 6 months |
+|      10010 | Fan             |  1500 | 2021-10-15  | 1 year   |
+|      12893 | Cooler          |  6000 | 2021-01-05  | 1 year   |
+|      10215 | AC              | 20000 | 2021-02-15  | 2 year   |
++------------+-----------------+-------+-------------+----------+
+8 rows in set (0.05 sec)use hardware;
+Database changed
+mysql> create table electronic_items;
+ERROR 1113 (42000): A table must have at least 1 column
+mysql> create table electronic_items(
+    -> product_id int(5) primary key,
+    -> pname varchar(20) not null,
+    -> cost double not null,
+    -> date_of_man date not null,
+    -> warranty varchar(10) not null
+    -> );
+Query OK, 0 rows affected (0.43 sec)
+
+mysql> insert into table electronics_items values(10010,'Fan',1500,'15-10-2021','1 year');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table electronics_items values(10010,'Fan',1500,'15-10-2021','1 year')' at line 1
+mysql> insert into table electronics_items values(10010,'Fan',1500.00,'15-10-2021','1 year');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table electronics_items values(10010,'Fan',1500.00,'15-10-2021','1 year')' at line 1
+mysql> insert into table electronics_items values(10010,'Fan',1500.00,'2021-10-15','1 year');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table electronics_items values(10010,'Fan',1500.00,'2021-10-15','1 year')' at line 1
+mysql> insert into table electronics_items value(10010,'Fan',1500.00,'2021-10-15','1 year');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table electronics_items value(10010,'Fan',1500.00,'2021-10-15','1 year')' at line 1
+mysql> insert into electronics_items value(10010,'Fan',1500.00,'2021-10-15','1 year');
+ERROR 1146 (42S02): Table 'hardware.electronics_items' doesn't exist
+mysql> insert into electronic_items value(10010,'Fan',1500.00,'2021-10-15','1 year');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into electronic_items value(10015,'Television',45000.00,'2021-12-15','1 year');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into electronic_items value(10215,'AC',20000.00,'2021-02-15','2 year');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into electronic_items value(14515,'Refrigerator',18000.00,'2021-05-15','2 year');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into electronic_items value(14025,'Washing Machine',14000.00,'2021-07-25','1 year');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into electronic_items value(12855,'Music Player',3900.00,'2021-11-25','6 months');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into electronic_items value(12855,'Heater',4000.00,'2021-1-05','6 months');
+ERROR 1062 (23000): Duplicate entry '12855' for key 'PRIMARY'
+mysql> insert into electronic_items value(12458,'Heater',4000.00,'2021-1-05','6 months');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into electronic_items value(12893,'Cooler',6000.00,'2021-1-05','1 year');
+Query OK, 1 row affected (0.23 sec)
+
+mysql> select * from electronic_items;
++------------+-----------------+-------+-------------+----------+
+| product_id | pname           | cost  | date_of_man | warranty |
++------------+-----------------+-------+-------------+----------+
+|      10010 | Fan             |  1500 | 2021-10-15  | 1 year   |
+|      10015 | Television      | 45000 | 2021-12-15  | 1 year   |
+|      10215 | AC              | 20000 | 2021-02-15  | 2 year   |
+|      12458 | Heater          |  4000 | 2021-01-05  | 6 months |
+|      12855 | Music Player    |  3900 | 2021-11-25  | 6 months |
+|      12893 | Cooler          |  6000 | 2021-01-05  | 1 year   |
+|      14025 | Washing Machine | 14000 | 2021-07-25  | 1 year   |
+|      14515 | Refrigerator    | 18000 | 2021-05-15  | 2 year   |
++------------+-----------------+-------+-------------+----------+
+8 rows in set (0.00 sec)
+
+mysql> alter table electronic_items
+    -> add costumer varchar(20);
+Query OK, 0 rows affected (1.29 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from electronic_items;
++------------+-----------------+-------+-------------+----------+----------+
+| product_id | pname           | cost  | date_of_man | warranty | costumer |
++------------+-----------------+-------+-------------+----------+----------+
+|      10010 | Fan             |  1500 | 2021-10-15  | 1 year   | NULL     |
+|      10015 | Television      | 45000 | 2021-12-15  | 1 year   | NULL     |
+|      10215 | AC              | 20000 | 2021-02-15  | 2 year   | NULL     |
+|      12458 | Heater          |  4000 | 2021-01-05  | 6 months | NULL     |
+|      12855 | Music Player    |  3900 | 2021-11-25  | 6 months | NULL     |
+|      12893 | Cooler          |  6000 | 2021-01-05  | 1 year   | NULL     |
+|      14025 | Washing Machine | 14000 | 2021-07-25  | 1 year   | NULL     |
+|      14515 | Refrigerator    | 18000 | 2021-05-15  | 2 year   | NULL     |
++------------+-----------------+-------+-------------+----------+----------+
+8 rows in set (0.00 sec)
+
+mysql> rename costumer to customer;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'costumer to customer' at line 1
+mysql> select * from electronic_items
+    -> rename costumer to customer;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'rename costumer to customer' at line 2
+mysql> rename column costumer to customer;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column costumer to customer' at line 1
+mysql> select * from electronic_items
+    -> rename column costumer to customer;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'rename column costumer to customer' at line 2
+mysql> rename table electronic_items to electronic_items_shop;
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> select * from electronic_items;
+ERROR 1146 (42S02): Table 'hardware.electronic_items' doesn't exist
+mysql> select * from electronic_items_shop;
++------------+-----------------+-------+-------------+----------+----------+
+| product_id | pname           | cost  | date_of_man | warranty | costumer |
++------------+-----------------+-------+-------------+----------+----------+
+|      10010 | Fan             |  1500 | 2021-10-15  | 1 year   | NULL     |
+|      10015 | Television      | 45000 | 2021-12-15  | 1 year   | NULL     |
+|      10215 | AC              | 20000 | 2021-02-15  | 2 year   | NULL     |
+|      12458 | Heater          |  4000 | 2021-01-05  | 6 months | NULL     |
+|      12855 | Music Player    |  3900 | 2021-11-25  | 6 months | NULL     |
+|      12893 | Cooler          |  6000 | 2021-01-05  | 1 year   | NULL     |
+|      14025 | Washing Machine | 14000 | 2021-07-25  | 1 year   | NULL     |
+|      14515 | Refrigerator    | 18000 | 2021-05-15  | 2 year   | NULL     |
++------------+-----------------+-------+-------------+----------+----------+
+8 rows in set (0.01 sec)
